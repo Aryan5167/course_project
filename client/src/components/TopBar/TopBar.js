@@ -1,8 +1,15 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import './TopBar.css';
 import { Bell, MessageSquareMore, Filter } from 'lucide-react';
 
 const Topbar = () => {
+  const [showFilter, setShowFilter] = useState(false);
+
+  const toggleFilter = () => {
+    setShowFilter(!showFilter);
+  };
+
   return (
     <div className="topbar">
       <div className="logo">
@@ -27,8 +34,43 @@ const Topbar = () => {
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input style={{marginLeft:"10px"}} type="text" placeholder="Search here..." />
-        <Filter className="filter-icon" />
+        <input style={{ marginLeft: "10px" }} type="text" placeholder="Search here..." />
+        <Filter className="filter-icon" onClick={toggleFilter} />
+        {showFilter && (
+          <div className="filter-dropdown">
+            <h3>Filter By:</h3>
+            <div className='f-box'>
+              <label>Department:</label>
+              <select>
+                <option>All Departments</option>
+                <option>Computer Science</option>
+                <option>Mathematics</option>
+                {/* Add more departments as needed */}
+              </select>
+            </div>
+            <div className='f-box'>
+              <label>Rating:</label>
+              <select>
+                <option>All Ratings</option>
+                <option>5 Stars</option>
+                <option>4 Stars & Up</option>
+                <option>3 Stars & Up</option>
+                {/* Add more ratings as needed */}
+              </select>
+            </div>
+            <div className='f-box'>
+              <label>Semester:</label>
+              <select>
+                <option>1st</option>
+                <option>2nd</option>
+                <option>3rd</option>
+                <option>4th</option>
+                {/* Add more ratings as needed */}
+              </select>
+            </div>
+            <button onClick={toggleFilter}>Apply Filters</button>
+          </div>
+        )}
       </div>
       <div className="user-section">
         <MessageSquareMore className="icon" />
@@ -44,3 +86,4 @@ const Topbar = () => {
 };
 
 export default Topbar;
+
